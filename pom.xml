@@ -40,12 +40,7 @@
 			<groupId>io.dekorate</groupId>
 			<artifactId>kubernetes-spring-starter</artifactId>
 			<version>${dekorate.version}</version>
-		  </dependency>
-		  <dependency>
-			<groupId>io.dekorate</groupId>
-			<artifactId>servicecatalog-annotations</artifactId>
-			<version>${dekorate.version}</version>
-		  </dependency>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
