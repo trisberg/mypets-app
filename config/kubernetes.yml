@@ -2,6 +2,9 @@
 apiVersion: "v1"
 kind: "Service"
 metadata:
+  annotations:
+    osiris.deislabs.io/enabled: "true"
+    osiris.deislabs.io/deployment: "mypets"
   labels:
     app: "mypets"
     version: "0.0.1-SNAPSHOT"
@@ -20,6 +23,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   annotations:
+    osiris.deislabs.io/enabled: "true"
     service.projectriff.io/binding-type: "spring-boot"
     service.projectriff.io/binding-secrets: "mypets-credentials"
   labels:
