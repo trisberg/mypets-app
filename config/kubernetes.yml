@@ -51,7 +51,7 @@ spec:
             path: "/actuator/health"
             port: 8080
             scheme: "HTTP"
-          initialDelaySeconds: 0
+          initialDelaySeconds: 30
           periodSeconds: 30
           timeoutSeconds: 10
         readinessProbe:
@@ -59,6 +59,6 @@ spec:
             path: "/actuator/health"
             port: 8080
             scheme: "HTTP"
-          initialDelaySeconds: 0
-          periodSeconds: 30
+          initialDelaySeconds: 15
+          periodSeconds: 5
           timeoutSeconds: 10
