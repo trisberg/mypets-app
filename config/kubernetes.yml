@@ -4,7 +4,7 @@ kind: "Service"
 metadata:
   labels:
     app: "mypets"
-    version: "0.0.1-SNAPSHOT"
+    version: "0.0.1-refresh"
   name: "mypets"
 spec:
   ports:
@@ -13,35 +13,35 @@ spec:
     targetPort: 8080
   selector:
     app: "mypets"
-    version: "0.0.1-SNAPSHOT"
+    version: "0.0.1-refresh"
   type: "LoadBalancer"
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  annotations:
-    service.projectriff.io/binding-type: "spring-boot"
-    service.projectriff.io/binding-secrets: "mypets-credentials"
   labels:
     app: "mypets"
-    version: "0.0.1-SNAPSHOT"
+    version: "0.0.1-refresh"
   name: "mypets"
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: "mypets"
-      version: "0.0.1-SNAPSHOT"
+      version: "0.0.1-refresh"
   template:
     metadata:
       labels:
         app: "mypets"
-        version: "0.0.1-SNAPSHOT"
+        version: "0.0.1-refresh"
     spec:
       containers:
       - name: "app"
-        image: "trisberg/mypets:0.0.1-SNAPSHOT"
+        image: "springdeveloper/mypets:0.0.1-refresh"
         imagePullPolicy: "Always"
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: refresh
         ports:
         - containerPort: 8080
           name: "http"
@@ -62,3 +62,14 @@ spec:
           initialDelaySeconds: 15
           periodSeconds: 5
           timeoutSeconds: 10
+        volumeMounts:
+        - name: config
+          mountPath: "/config"
+          readOnly: true
+      volumes:
+      - name: config
+        secret:
+          secretName: mypets-refresh
+          items:
+          - key: application.yaml
+            path: application-refresh.yaml
