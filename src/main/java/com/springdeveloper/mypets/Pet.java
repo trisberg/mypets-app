@@ -1,24 +1,14 @@
 package com.springdeveloper.mypets;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
 
-@Entity
-@Table(name = "pets")
 public class Pet {
 
-	@Id @GeneratedValue
+	@Id
 	Long id;
 
 	String name;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "type_id")
 	private PetType type;
 
 	public Long getId() {
