@@ -23,6 +23,8 @@ spec:
         env:
           - name: SPRING_CLOUD_KUBERNETES_CONFIG_SOURCES
             value: /etc/config.yaml
+          - name: SPRING_CLOUD_KUBERNETES_CONFIG_ENABLE_API
+            value: 'false'
           - name: SPRING_DATA_MONGODB_PASSWORD
             valueFrom:
                secretKeyRef:
