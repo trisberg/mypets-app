@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mypets
+  name: mypets
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mypets
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mypets
+    spec:
+      containers:
+      - image: gcr.io/cf-sandbox-trisberg/mypets:mongodb
+        name: mypets
+        env:
+          - name: SPRING_CLOUD_KUBERNETES_CONFIG_SOURCES
+            value: /etc/config.yaml
+          - name: SPRING_DATA_MONGODB_PASSWORD
+            valueFrom:
+               secretKeyRef:
+                 name: mypets-mongodb
+                 key: mongodb-root-password
+        volumeMounts:
+        - mountPath: /etc
+          name: config
+          readOnly: true
+      volumes:
+      - name: config
+        secret:
+          defaultMode: 420
+          items:
+          - key: config.yaml
+            path: application.yaml
+          configMapName: mypets

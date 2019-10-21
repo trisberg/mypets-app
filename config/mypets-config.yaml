@@ -1,0 +1,13 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: mypets
+data:
+  application.yaml: |-
+    spring:
+      data:
+        mongodb:
+          uri: mongodb://mypets-mongodb.default.svc.cluster.local:27017
+          username: root
+          database: test
+
