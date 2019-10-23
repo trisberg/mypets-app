@@ -7,7 +7,8 @@ data:
     spring:
       data:
         mongodb:
-          uri: mongodb://mypets-mongodb.default.svc.cluster.local:27017
-          username: root
+          host: mypets-mongodb.default.svc.cluster.local
+          port: 27017
+          username: riff
           database: test
 

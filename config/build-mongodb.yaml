@@ -1,0 +1,21 @@
+kind: Build
+apiVersion: build.pivotal.io/v1alpha1
+metadata:
+  annotations:
+    image.build.pivotal.io/reason: CONFIG
+  labels:
+    image.build.pivotal.io/buildNumber: "1"
+    image.build.pivotal.io/image: mypets
+  name: mypets-build-1
+  namespace: default
+spec:
+  builder:
+    image: index.docker.io/cloudfoundry/cnb@sha256:d0f352a654f98171970e8982daaa1c6a212293db9cc7c6d18bf6510b1f21e693
+  serviceAccount: riff-build
+  source:
+    git:
+      revision: 7515b06711dc4dc6ce22e7036c908333249bb05c
+      url: https://github.com/trisberg/mypets-app.git
+  tags:
+  - gcr.io/cf-sandbox-trisberg/mypets:mongodb
+

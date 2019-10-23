@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: mypets
   name: mypets
@@ -10,10 +9,8 @@ spec:
   selector:
     matchLabels:
       app: mypets
-  strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: mypets
     spec:
@@ -21,24 +18,23 @@ spec:
       - image: gcr.io/cf-sandbox-trisberg/mypets:mongodb
         name: mypets
         env:
-          - name: SPRING_CLOUD_KUBERNETES_CONFIG_SOURCES
-            value: /etc/config.yaml
+          - name: SPRING_CLOUD_KUBERNETES_CONFIG_PATHS
+            value: /config/config.yaml
           - name: SPRING_CLOUD_KUBERNETES_CONFIG_ENABLE_API
             value: 'false'
           - name: SPRING_DATA_MONGODB_PASSWORD
             valueFrom:
                secretKeyRef:
                  name: mypets-mongodb
-                 key: mongodb-root-password
+                 key: mongodb-password
         volumeMounts:
-        - mountPath: /etc
+        - mountPath: /config
           name: config
           readOnly: true
       volumes:
       - name: config
-        secret:
-          defaultMode: 420
+        configMap:
+          name: mypets
           items:
-          - key: config.yaml
-            path: application.yaml
-          configMapName: mypets
+          - key: application.yaml
+            path: config.yaml

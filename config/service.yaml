@@ -1,18 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: null
   labels:
     app: mypets
   name: mypets
 spec:
   ports:
-  - name: 80-8080
+  - name: http
     port: 80
     protocol: TCP
     targetPort: 8080
   selector:
     app: mypets
-  type: NodePort
+  type: ClusterIP
 status:
   loadBalancer: {}
