@@ -14,7 +14,7 @@ spec:
   serviceAccount: riff-build
   source:
     git:
-      revision: 7515b06711dc4dc6ce22e7036c908333249bb05c
+      revision: mongodb-sck8s
       url: https://github.com/trisberg/mypets-app.git
   tags:
   - gcr.io/cf-sandbox-trisberg/mypets:mongodb

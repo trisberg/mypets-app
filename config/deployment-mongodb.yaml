@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
       - image: gcr.io/cf-sandbox-trisberg/mypets:mongodb
+        imagePullPolicy: Always
         name: mypets
         env:
           - name: SPRING_CLOUD_KUBERNETES_CONFIG_PATHS
